@@ -1,3 +1,3 @@
-import BookList from './book-list.js';
-
-export { BookList };
+import BookList from './book-list';
+import BookDetail from './book-detail';
+export { BookList , BookDetail};

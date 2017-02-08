@@ -1,16 +1,23 @@
 import React, {Component} from 'react';
 // connect 用来桥接react和redux.将redux的状态传递到react中
 import { connect } from 'react-redux';
+// 自己创建的action
+import {selectBook} from '../actions';
+import {bindActionCreators} from 'redux';
+
 
 class BookList extends Component {
-    // constructor(props){
-    //     super(props);
-    //     this.renderList = this.renderList.bind(this);
-    // }
+    constructor(props){
+        super(props);
+        this.renderList = this.renderList.bind(this);
+    }
     renderList(){
         return this.props.books.map(book=>{
             return (
-                <li className="list-group-item" key={book.title}>{book.title}</li>
+                <li className="list-group-item" 
+                    key={book.title}
+                    onClick = {()=>this.props.selectBook(book)} 
+                >{book.title}</li>
             );
         });
     }
@@ -31,5 +38,9 @@ function mapStateToProps(state){
         books:state.books
     };
 }
+// 将我们的事件处理函数传递到容器中
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({selectBook:selectBook},dispatch);
+}
 
-export default connect(mapStateToProps)(BookList);
+export default connect(mapStateToProps,mapDispatchToProps)(BookList);
