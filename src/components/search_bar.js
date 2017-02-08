@@ -20,24 +20,29 @@ class SearchBar extends  Component {
         this.onInputChange = this.onInputChange.bind(this);
     }
     onInputChange(event){
-        console.log(event.target.value);
+        // console.log(event.target.value);
         // 修改state必须调用setState来改变state,否则不会触发默认的rerender操作。
+        // 当我们尝试这样输入的时候，会不断的去搜索，所以要限定搜索的间隔
+        let term =event.target.value;
         this.setState({
-            term:event.target.value
+            term
         });
+        this.props.onSearchTermChange(term);
+        
     }
     render(){
 
 
         // react 支持事件触发，我们可以定义一个input的onChange去触发当输入变化的时候操作
-        return (<div>
+        return (<div className="search-bar form-group">
                     <input 
                         value = {this.state.term}
                         onChange = {this.onInputChange}
                         placeholder = 'Searching...'
+                        className='form-control'
+                        type="search"
                     />
                     <br/>
-                    Your search term is :{this.state.term}
                 </div>);
     }
 }

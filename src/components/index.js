@@ -1,3 +1,4 @@
 import SearchBar from './search_bar';
-
-export {SearchBar};
+import VideoList from './video_list';
+import VideoDetail from './video_detail';
+export {SearchBar,VideoList,VideoDetail};
